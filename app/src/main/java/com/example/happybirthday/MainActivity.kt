@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.happybirthday.ui.theme.HappyBirthdayTheme
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +28,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Pavel!")
+//                    Greeting("Pavel!")
                 }
             }
         }
@@ -44,10 +45,24 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     }
 }
 
+@Composable
+fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
+    Text(
+        text = message,
+        fontSize = 100.sp,
+        lineHeight = 116.sp
+    )
+    Text(
+        text = from,
+        fontSize = 36.sp
+    )
+}
+
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun BirthdayCardPreview() {
     HappyBirthdayTheme {
-        Greeting("Pavel")
+//        Greeting("Pavel")
+        GreetingText(message = "HB Pavel!", from = "Ruslan M" )
     }
 }
