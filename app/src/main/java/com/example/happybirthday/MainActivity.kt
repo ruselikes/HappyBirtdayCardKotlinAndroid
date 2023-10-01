@@ -14,12 +14,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.happybirthday.ui.theme.HappyBirthdayTheme
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.layout.ContentScale
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +36,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GreetingText(message = "Happy Birthday Pavel!", from = "From Ruslan")
+//                    GreetingText(message = "Happy Birthday Pavel!", from = "From Ruslan")
+                    GreetingImage(stringResource(R.string.happy_birthday_text), from = stringResource(R.string.ot_kogo))
                 }
             }
         }
@@ -47,7 +53,7 @@ fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
     ) {
         Text(
             text = message,
-            fontSize = 50.sp,
+            fontSize = 70.sp,
             lineHeight = 100.sp,
             textAlign = TextAlign.Center
         )
@@ -55,16 +61,36 @@ fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
             text = from,
             fontSize = 36.sp,
             modifier = Modifier
-                .padding(5.dp)
-                .align(alignment = Alignment.End),color = Color.Cyan
+                .padding(top = 20.dp)
+                .align(alignment = Alignment.CenterHorizontally)
+                .background(color = Color.Cyan)
         )
     }
 }
+@Composable
+fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) {
+    val image = painterResource(R.drawable.androidparty) //Функция загружает ресурс для рисования изображений и принимает идентификатор ресурса (R.drawable.androidparty в качестве аргумента.
+    Box {
+        Image(
+            painter = image,
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            alpha = 0.5F
+        )
+        GreetingText(
+            message = message,
+            from = from,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp))
+    }
+}
 
-@Preview(showBackground = true)
+@Preview(showBackground = false)
 @Composable
 fun BirthdayCardPreview() {
     HappyBirthdayTheme {
-        GreetingText(message = "Happy Birthday Pavel!", from ="From Ruslan M")
+        GreetingImage(message = "Happy Birthday Pavel!", from ="From Ruslan M")
+//        GreetingText(message = "Happy Birthday Pavel!", from ="From Ruslan M")
     }
 }
